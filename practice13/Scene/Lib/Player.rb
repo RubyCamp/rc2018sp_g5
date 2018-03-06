@@ -63,9 +63,10 @@ class Player < Sprite
             @flg = 0
         end
 
-        #弾
-        if Input.key_push?(K_Z)
-          SHOT_SOUND.play
+        #弾の発射
+        if Input.key_push?(K_Z) && PowerGage.getPowerGage > 100
+          SHOT_SOUND.play #サウンド
+          PowerGage.setPowerGage(-10)#powerを減らす
           playershot << Playershot.new(self.x,self.y)
         end
 
