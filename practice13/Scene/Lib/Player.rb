@@ -31,7 +31,7 @@ class Player < Sprite
 
         #弾の発射
         if Input.key_push?(K_Z) && PowerGage.getPowerGage > 100
-          SHOT_SOUND.play #サウンド
+          PLAYER_SHOT_SOUND.play #サウンド
           PowerGage.setPowerGage(-10)#powerを減らす
           playershot << Playershot.new(self.x,self.y)
         end
@@ -64,6 +64,7 @@ class Playershot < Sprite
   end
 
   def shot
+     EXPLOSION_SOUND.play
      self.vanish
   end
 end
