@@ -24,7 +24,7 @@ class Player < Sprite
 
         #ジャンプ
         if Input.key_push?(K_SPACE) && @flg == 1
-            # JUMP_SOUND.play
+            JUMP_SOUND.play
             @gravity = -20
             @flg = 0
         end
