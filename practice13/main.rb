@@ -6,7 +6,7 @@ require_relative 'Scene/scene_game1/Director'
 #ゲーム名
 Window.caption = 'あくしょんげーむてきな'
 
-#テスト用
+#テスト用 舞台裏
 # Window.width = 1024
 # Window.height = 800
 
