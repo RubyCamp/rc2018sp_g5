@@ -24,14 +24,17 @@ module Game
       Sprite.update([@playershots,@enemies])#プレイヤーの弾配列と敵配列の描画
       Sprite.check(@playershots,@enemies)#プレイヤーの弾と敵配列の当たり判定
 
+      #敵出現
       if @count % 50 == 0
-                @enemies << Enemy.new(600,352)
-            end
+        @enemies << Enemy.new(600,352)
+      end
+      @count += 1
 
-        @count += 1
-        Sprite.clean([@playershots,@enemies])
+      #vanishされたspriteがあれば、消去
+      Sprite.clean([@playershots,@enemies])
 
-        @powergage.update
+      #パワーゲージの表示
+      @powergage.update
 
     end
   end
