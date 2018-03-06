@@ -4,10 +4,9 @@ class Player < Sprite
         self.x = 0
         self.y = 0
         self.image = Image.new(32,32,C_RED)
-        @y_prev = 32
-        @gravity = 2
-        @jump_ok = false
-        @selfprev = 0
+        @y_prev = 32 #1フレーム前のy座標
+        @gravity = 2#重力
+        @jump_ok = false #ジャンプ許可
         @speed = 5
     end
 
