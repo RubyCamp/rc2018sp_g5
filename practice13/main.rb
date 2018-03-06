@@ -13,6 +13,7 @@ Scene.add(Game::Director.new, :game1)
 #Sound
 SHOT_SOUND = Sound.new('./Sound/explosion.wav')
 BGM_SOUND = Sound.new('./Sound/bgm.wav')
+JUMP_SOUND = Sound.new('./Sound/jump.wav')
 
 #タイトル画面へ移行
 Scene.move_to(:title)
