@@ -2,12 +2,14 @@ require_relative '../Lib/Player'
 require_relative '../Lib/Enemy'
 require_relative '../Lib/Tile'
 require_relative '../Lib/Haikei'#背景クラスのファイルを読み込み
-require_relative '../Lib/Info/PowerGage'
+require_relative '../Lib/Info/PowerGage'#弾を発射するためのパワーゲージクラスのファイル読み込み
+require_relative '../Lib/Info/Life'#プレイヤーの残りライフクラス
 
 module Game
   class Director
     def initialize
       @powergage = PowerGage.new #パワーゲージ
+      @life = Life.new(3) #プレイヤーの残りライフ
       @haikei = Haikei.new#背景インスタンス
       @tile = Tile.new #床
       @player = Player.new #プレイヤー
@@ -35,6 +37,8 @@ module Game
 
       #パワーゲージの表示
       @powergage.update
+      #プレイヤーの残りライフの表示
+      @life.update
 
     end
   end
