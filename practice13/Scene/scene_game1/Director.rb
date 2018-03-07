@@ -26,13 +26,14 @@ module Game
       @haikei.draw#背景を描画
       @tile.update #床を描画
       @sky.update #ボス移動上限天井
+      @player.update(@life) #プレイヤー描画
       Sprite.check(@tile,@player) #床とプレイヤーのめり込みチェック
-      @player.update(@playershots)#プレイヤーの弾の描画
       Sprite.update([@playershots,@enemies])#プレイヤーの弾配列と敵配列の描画
       Sprite.check(@playershots,@enemies)#プレイヤーの弾と敵配列の当たり判定
       if Sprite.check(@enemies,@player,shot=:shot,hit=:hit2)#敵配列とプレイヤー配列の当たり判定
         @life.life -= 1
       end
+      Sprite.check(@playershots,@boss,shot= :shot,hit = :hitboss) #プレイヤーの弾配列とボスの当たり判定
 
 
       Sprite.check(@sky,@boss) #ボス移動上限天井とボスの当たり判定

@@ -25,4 +25,8 @@ class Boss < Sprite
     def hit_tile
         @flg = 0
     end
+
+    def hit_boss
+        self.vanish
+    end
 end
