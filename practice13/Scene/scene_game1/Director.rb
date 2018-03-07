@@ -15,7 +15,6 @@ module Game
       @haikei = Haikei.new#背景インスタンス
       @tile = Tile.new #床
       @sky = Sky.new #ボス移動上限用
-      @player = Player.new #プレイヤー
       @player = Player.new(@life) #プレイヤー
       @playershots = [] #プレイヤーの弾
       @enemies = [] #敵配列

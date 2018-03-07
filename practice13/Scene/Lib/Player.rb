@@ -49,7 +49,7 @@ class Player < Sprite
 
     #敵と当たったらLIFEが減る(仮)
     def hit2
-        
+
     end
 end
 
@@ -65,7 +65,7 @@ class Playershot < Sprite
     self.draw
     self.x += 10
 
-    if self.x > 640
+    if self.x > Window.width
       self.vanish
     end
   end
