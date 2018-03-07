@@ -10,7 +10,7 @@ require_relative 'Scene/scene_clear/Director'
 Window.caption = 'あくしょんげーむてきな'
 
 
-Window.width = 800
+Window.width = 1024#800
 Window.height = 600
 
 #
