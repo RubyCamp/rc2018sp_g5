@@ -16,11 +16,17 @@ class Boss < Sprite
         end
     end
 
+    #移動上限に達したとき、DOWN移動に変更
     def hit
         @flg = 1
     end
 
+    #床に接触したら、UP移動に変更
     def hit_tile
         @flg = 0
+    end
+
+    def hit_boss
+        self.vanish
     end
 end
