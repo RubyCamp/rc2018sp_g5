@@ -6,10 +6,12 @@ require_relative '../Lib/Tile2'
 require_relative '../Lib/Sky' #ボスクラス制限
 require_relative '../Lib/Haikei'#背景クラスのファイルを読み込み
 require_relative '../Lib/Info/PowerGage'#弾を発射するためのパワーゲージクラスのファイル読み込み
-require_relative '../Lib/Info/Life'#プレイヤーの残りライフ
-require_relative '../Lib/Info/BossLife'#ボスの残りライフ
+require_relative '../Lib/Info/Life'#プレイヤーの残りライフクラス
+require_relative '../Lib/Info/BossLife'#ボスの残りライフクラス
 require_relative '../senser/senser_all'
 require_relative '../senser/ligh_f'
+require_relative '../senser/distance_senser'#距離センサ
+
 
 module Game
   class Director
@@ -31,6 +33,7 @@ module Game
       @board = board
       @senser_all = Senser_all.new(board)
       @light_now = 0
+      #@font = Font.new(30,'MSゴシック')#ジャンプ判定の文字　デバッグ用
     end
 
     def play
@@ -42,8 +45,9 @@ module Game
       @tile.update #床を描画
       @tile2.update #床2を描画
 
+
       @sky.update #ボス移動上限天井
-      @player.update(@playershots,@light_data,Ligh_f.main(open_light,close_light,@board.analog_read(0)))#プレイヤーの弾の描画
+      @player.update(@playershots,@light_data,Ligh_f.main(open_light,close_light,@board.analog_read(0)),Distance_senser.main(@senser_all.distance_value_getter))#プレイヤーの弾の描画
       Sprite.check(@tile,@player) #床とプレイヤーのめり込みチェック
       Sprite.check(@tile2,@player) #床とプレイヤーのめり込みチェック
       Sprite.update([@playershots,@enemies])#プレイヤーの弾配列と敵配列の描画
@@ -87,10 +91,16 @@ module Game
           Scene.move_to(:gameover)
       end
 
+      # #ジャンプ判定を画面に表示　デバッグ用
+      # if Distance_senser.main(@senser_all.distance_value_getter) ==true
+      #   Window.draw_font(200,100,"ジャンプ！",@font)
+      # else
+      #   Window.draw_font(200,100,"ノージャンプ",@font)
+      # end
 
       #Ligh_f.main(open_light,close_light,@board.analog_read(0))
 
-       #@senser_all.draw
+      #@senser_all.draw
     end
   end
 end

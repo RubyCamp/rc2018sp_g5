@@ -1,4 +1,4 @@
-class BossLife
+class Bosslife
   attr_accessor :bosslife
     def initialize(bosslife)
         @bosslife = bosslife #ボスライフ
