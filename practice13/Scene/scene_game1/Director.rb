@@ -18,10 +18,10 @@ module Game
     def initialize(board)
       @powergage = PowerGage.new #パワーゲージ
       @life = Life.new(5) #プレイヤーの残りライフ
-      @bosslife = Bosslife.new(3)#ボスの残りライフ
+      @bosslife = BossLife.new(3)#ボスの残りライフ
       @haikei = Haikei.new#背景インスタンス
       @tile = Tile.new #床
-      @tile2 = Tile2.new #床
+      #@tile2 = Tile2.new #床
       @sky = Sky.new #ボス移動上限用
       @player = Player.new(@life) #プレイヤー
       @playershots = [] #プレイヤーの弾
@@ -41,7 +41,7 @@ module Game
 
       @haikei.draw#背景を描画
       @tile.update #床を描画
-      @tile2.update #床を描画
+      #@tile2.update #床を描画
       @sky.update #ボス移動上限天井
       Sprite.check(@tile,@player) #床とプレイヤーのめり込みチェック
       @player.update(@playershots,@light_data,Ligh_f.main(open_light,close_light,@board.analog_read(0)),Distance_senser.main(@senser_all.distance_value_getter))#プレイヤーの弾の描画
