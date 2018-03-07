@@ -1,5 +1,6 @@
 require_relative '../Lib/Player'
 require_relative '../Lib/Enemy'
+require_relative '../Lib/Boss'
 require_relative '../Lib/Tile'
 require_relative '../Lib/Haikei'#背景クラスのファイルを読み込み
 require_relative '../Lib/Info/PowerGage'#弾を発射するためのパワーゲージクラスのファイル読み込み
@@ -16,6 +17,7 @@ module Game
       @playershots = [] #プレイヤーの弾
       @enemies = [] #敵配列
       @count = 0#敵キャラ生成用カウント
+      @boss = Boss.new#ボス生成(テスト用)
     end
 
     def play
@@ -35,6 +37,8 @@ module Game
         @enemies << Enemy.new(600,352)
       end
       @count += 1
+
+      #ボス出現チェック用
 
       #vanishされたspriteがあれば、消去
       Sprite.clean([@playershots,@enemies])
