@@ -1,4 +1,4 @@
-module Gameover
+module GameOver
     class Director
         def initialize
             #Font
