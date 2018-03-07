@@ -16,6 +16,7 @@ module Game
       @tile = Tile.new #床
       @sky = Sky.new #ボス移動上限用
       @player = Player.new #プレイヤー
+      @player = Player.new(@life) #プレイヤー
       @playershots = [] #プレイヤーの弾
       @enemies = [] #敵配列
       @count = 0#敵キャラ生成用カウント
@@ -30,6 +31,10 @@ module Game
       @player.update(@playershots)#プレイヤーの弾の描画
       Sprite.update([@playershots,@enemies])#プレイヤーの弾配列と敵配列の描画
       Sprite.check(@playershots,@enemies)#プレイヤーの弾と敵配列の当たり判定
+      if Sprite.check(@enemies,@player,shot=:shot,hit=:hit2)#敵配列とプレイヤー配列の当たり判定
+        @life.life -= 1
+      end
+
 
       Sprite.check(@sky,@boss) #ボス移動上限天井とボスの当たり判定
       Sprite.check(@tile,@boss,shot= :shot,hit= :hit_tile) #ボスと床の当たり判定
@@ -50,6 +55,9 @@ module Game
       @powergage.update
       #プレイヤーの残りライフの表示
       @life.update
+      if @life.life == 0
+          Scene.move_to(:gameover)
+      end
 
     end
   end
