@@ -1,5 +1,5 @@
 class Player < Sprite
-    def initialize
+    def initialize(life)
         super
         self.x = 0
         self.y = 0
@@ -8,6 +8,7 @@ class Player < Sprite
         @gravity = 2#重力
         @jump_ok = false #ジャンプ許可
         @speed = 5
+        @life = life
     end
 
     def update(playershot)
@@ -37,11 +38,18 @@ class Player < Sprite
 
         #描画
         self.draw
+        #プレイヤーの残りライフの表示
+        #@LIFE.update
     end
 
     def hit
         self.y = 368
         @flg = 1
+    end
+
+    #敵と当たったらLIFEが減る(仮)
+    def hit2
+        
     end
 end
 
