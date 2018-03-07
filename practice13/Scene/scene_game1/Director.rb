@@ -84,6 +84,8 @@ module Game
       @powergage.update
       #プレイヤーの残りライフの表示
       @life.update
+      #Bossの残りライフの表示
+      @boss_life
 
       #Gameover処理
       if @life.life == 0 || @player.y > Window.height
