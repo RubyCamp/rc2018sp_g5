@@ -18,8 +18,4 @@ class Enemy < Sprite
     def hit
         self.vanish
     end
-
-    def shot
-        self.vanish      
-    end
 end

@@ -1,5 +1,5 @@
 class Player < Sprite
-    def initialize(life)
+    def initialize
         super
         self.x = 0
         self.y = 0
@@ -8,10 +8,11 @@ class Player < Sprite
         @gravity = 2#重力
         @jump_ok = false #ジャンプ許可
         @speed = 5
-        @life = life
+        @shot = 0
+        @s_flag = 0
     end
 
-    def update(playershot)
+    def update(playershot,light_now,ligh_hantei)
 
         #重力の設定
         y_move = (self.y - @y_prev) + @gravity
@@ -28,9 +29,23 @@ class Player < Sprite
             @gravity = -20
             @flg = 0
         end
-
+        p ligh_hantei
+        #p @s_flag
         #弾の発射
-        if Input.key_push?(K_Z) && PowerGage.getPowerGage > 100
+        #if Input.key_push?(K_Z) && PowerGage.getPowerGage > 100
+=begin
+        if light_now == "open" && @s_flag == 0
+          @shot = 1
+          @s_flag = 1
+        elsif light_now == "open" && @s_flag == 1
+          @shot = 0
+        elsif light_now == "colse" && @s_flag == 0
+          @s_flag = 0
+        else
+          @shot = 0
+        end
+=end
+        if ligh_hantei == "open" && PowerGage.getPowerGage > 100
           PLAYER_SHOT_SOUND.play #サウンド
           PowerGage.setPowerGage(-10)#powerを減らす
           playershot << Playershot.new(self.x,self.y)
@@ -38,18 +53,11 @@ class Player < Sprite
 
         #描画
         self.draw
-        #プレイヤーの残りライフの表示
-        #@LIFE.update
     end
 
     def hit
         self.y = 368
         @flg = 1
-    end
-
-    #敵と当たったらLIFEが減る(仮)
-    def hit2
-
     end
 end
 
@@ -65,7 +73,7 @@ class Playershot < Sprite
     self.draw
     self.x += 10
 
-    if self.x > Window.width
+    if self.x > 640
       self.vanish
     end
   end
