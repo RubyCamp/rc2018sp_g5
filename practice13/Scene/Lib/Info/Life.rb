@@ -1,7 +1,7 @@
 class Life
     attr_accessor :life
-    def initialize(life)
-        @life = life #プレイヤーライフ
+    def initialize
+        @life = 3 #プレイヤーライフ
         @font = Font.new(30)  #font
     end
 

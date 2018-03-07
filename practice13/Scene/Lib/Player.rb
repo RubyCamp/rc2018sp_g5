@@ -29,7 +29,7 @@ class Player < Sprite
             @gravity = -20
             @flg = 0
         end
-        p ligh_hantei
+        #p ligh_hantei
         #p @s_flag
         #弾の発射
         #if Input.key_push?(K_Z) && PowerGage.getPowerGage > 100
@@ -58,6 +58,9 @@ class Player < Sprite
     def hit
         self.y = 368
         @flg = 1
+    end
+
+    def hit2
     end
 end
 

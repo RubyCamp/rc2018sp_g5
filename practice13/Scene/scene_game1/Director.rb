@@ -6,6 +6,7 @@ require_relative '../Lib/Haikei'#背景クラスのファイルを読み込み
 require_relative '../Lib/Sky'
 require_relative '../Lib/Info/PowerGage'#弾を発射するためのパワーゲージクラスのファイル読み込み
 require_relative '../Lib/Info/Life'#プレイヤーの残りライフクラス
+require_relative '../Lib/Info/BossLife'#ボスの残りライフクラス
 require_relative '../senser/senser_all'
 require_relative '../senser/ligh_f'
 
@@ -13,13 +14,14 @@ module Game
   class Director
     def initialize(board)
       @powergage = PowerGage.new #パワーゲージ
-      @life = Life.new(3) #プレイヤーの残りライフ
+      @life = Life.new #プレイヤーの残りライフ
       @haikei = Haikei.new#背景インスタンス
       @tile = Tile.new #床
       @player = Player.new #プレイヤー
       @playershots = [] #プレイヤーの弾
       @enemies = [] #敵配列
-      @boss = Boss.new(400,200)
+      @boss = Boss.new(400,200) #ボス
+      @boss_life = Bosslife.new(200)#ボスのライフ
       @count = 0#敵キャラ生成用カウント
       @board = board
       @senser_all = Senser_all.new(board)
@@ -40,7 +42,7 @@ module Game
       Sprite.check(@tile,@player) #床とプレイヤーのめり込みチェック
       Sprite.update([@playershots,@enemies])#プレイヤーの弾配列と敵配列の描画
       Sprite.check(@playershots,@enemies)#プレイヤーの弾と敵配列の当たり判定
-      if Sprite.check(@enemies,@player,shot=:shot,hit=:hit2)#敵配列とプレイヤー配列の当たり判定
+      if Sprite.check(@enemies,@player,shot=:shot,hit=:hit2) #敵配列とプレイヤー配列の当たり判定
         @life.life -= 1
       end
       Sprite.check(@playershots,@boss,shot= :shot,hit = :hitboss) #プレイヤーの弾配列とボスの当たり判定
@@ -48,6 +50,11 @@ module Game
 
       Sprite.check(@sky,@boss) #ボス移動上限天井とボスの当たり判定
       Sprite.check(@tile,@boss,shot= :shot,hit= :hit_tile) #ボスと床の当たり判定
+
+      #ボスとプレイヤーの弾の当たり判定
+      if Sprite.check(@playershots,@boss,shot= :shot,hit= :hit_boss)
+        @bosslife.bosslife -= 1
+      end
 
 
       #敵出現

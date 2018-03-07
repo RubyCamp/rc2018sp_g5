@@ -3,13 +3,15 @@ require 'smalrubot'
 require_relative 'Scene'
 require_relative 'Scene/scene_title/Director'
 require_relative 'Scene/scene_game1/Director'
+require_relative 'Scene/scene_gameover/Director'
+require_relative 'Scene/scene_clear/Director'
 
 #ゲーム名
 Window.caption = 'あくしょんげーむてきな'
 
-#テスト用 舞台裏
-# Window.width = 1024
-# Window.height = 800
+
+Window.width = 800
+Window.height = 600
 
 #
 board = Smalrubot::Board.new(Smalrubot::TxRx::Serial.new)
@@ -17,6 +19,8 @@ board = Smalrubot::Board.new(Smalrubot::TxRx::Serial.new)
 #シーンの追加
 Scene.add(Title::Director.new(board), :title)
 Scene.add(Game::Director.new(board), :game1)
+Scene.add(GameOver::Director.new, :gameover)
+Scene.add(GameClear::Director.new, :gameclear)
 
 #Sound
 PLAYER_SHOT_SOUND = Sound.new('./Sound/playershot.wav') #プレイヤー弾発射時

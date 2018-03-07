@@ -27,6 +27,7 @@ class Boss < Sprite
     end
 
     def hit_boss
-        self.vanish
+        #ボスの体力を減らす
+        put "ボスに当たりました"
     end
 end
