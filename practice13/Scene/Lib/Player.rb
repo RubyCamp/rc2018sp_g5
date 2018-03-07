@@ -1,19 +1,22 @@
 class Player < Sprite
-    def initialize
+    def initialize(life)
         super
         self.x = 0
         self.y = 0
-        self.image = Image.new(32,32,C_RED)
-        @y_prev = 32 #1フレーム前のy座標
+        self.image = Image.load('Scene/images/player1.png')
+        @y_prev = 50 #1フレーム前のy座標
         @gravity = 2#重力
         @jump_ok = false #ジャンプ許可
         @speed = 5
-        @shot = 0
-        @s_flag = 0
-      #  @frm=0 #連続ジャンプ防止用　神野
+        @life = life
+        @p_img = [Image.load('Scene/images/player1.png'),
+          Image.load('Scene/images/player2.png'),
+          Image.load('Scene/images/player3.png')]
+        @ani = 0
+        @anm = 0
     end
 
-    def update(playershot,light_now,ligh_hantei,distance_senser_hantei)
+    def update(playershot)
 
         #重力の設定
         y_move = (self.y - @y_prev) + @gravity
@@ -24,52 +27,42 @@ class Player < Sprite
         #左右移動
         self.x += Input.x * @speed
 
-        #ジャンプ スペースキー用
+        #ジャンプ
         if Input.key_push?(K_SPACE) && @flg == 1
             JUMP_SOUND.play
             @gravity = -20
             @flg = 0
         end
 
-        #ジャンプ　距離センサー用
-        if distance_senser_hantei == true && @flg == 1
-            JUMP_SOUND.play
-            @gravity = -20
-            @flg = 0
-        end
-
-        #p ligh_hantei
-        #p @s_flag
         #弾の発射
-        #if Input.key_push?(K_Z) && PowerGage.getPowerGage > 100
-=begin
-        if light_now == "open" && @s_flag == 0
-          @shot = 1
-          @s_flag = 1
-        elsif light_now == "open" && @s_flag == 1
-          @shot = 0
-        elsif light_now == "colse" && @s_flag == 0
-          @s_flag = 0
-        else
-          @shot = 0
-        end
-=end
-        if ligh_hantei == "open" && PowerGage.getPowerGage > 100
+        if Input.key_push?(K_Z) && PowerGage.getPowerGage > 100
           PLAYER_SHOT_SOUND.play #サウンド
           PowerGage.setPowerGage(-10)#powerを減らす
           playershot << Playershot.new(self.x,self.y)
         end
+
+        @ani += 1
+        if @ani == 10
+            @ani = 0
+            @anm += 1
+        end
+        if @anm == 3
+            @anm = 0
+        end
+        self.image = @p_img[@anm]
 
         #描画
         self.draw
     end
 
     def hit
-        self.y = 468
+        self.y = 368
         @flg = 1
     end
 
+    #敵と当たったらLIFEが減る(仮)
     def hit2
+
     end
 end
 
@@ -85,7 +78,7 @@ class Playershot < Sprite
     self.draw
     self.x += 10
 
-    if self.x > 640
+    if self.x > Window.width
       self.vanish
     end
   end
