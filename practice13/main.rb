@@ -2,6 +2,7 @@ require 'dxruby'
 require_relative 'Scene'
 require_relative 'Scene/scene_title/Director'
 require_relative 'Scene/scene_game1/Director'
+require_relative 'Scene/scene_gameover/Director'
 
 #ゲーム名
 Window.caption = 'あくしょんげーむてきな'
@@ -13,6 +14,8 @@ Window.caption = 'あくしょんげーむてきな'
 #シーンの追加
 Scene.add(Title::Director.new, :title)
 Scene.add(Game::Director.new, :game1)
+Scene.add(Gameover::Director.new, :gameover)
+
 
 #Sound
 PLAYER_SHOT_SOUND = Sound.new('./Sound/playershot.wav') #プレイヤー弾発射時
