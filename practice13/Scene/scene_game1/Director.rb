@@ -2,18 +2,22 @@ require_relative '../Lib/Player'
 require_relative '../Lib/Enemy'
 require_relative '../Lib/Boss'
 require_relative '../Lib/Tile'
+require_relative '../Lib/Tile2'
 require_relative '../Lib/Sky' #ボスクラス制限
 require_relative '../Lib/Haikei'#背景クラスのファイルを読み込み
 require_relative '../Lib/Info/PowerGage'#弾を発射するためのパワーゲージクラスのファイル読み込み
-require_relative '../Lib/Info/Life'#プレイヤーの残りライフクラス
+require_relative '../Lib/Info/Life'#プレイヤーの残りライフ
+require_relative '../Lib/Info/BossLife'#ボスの残りライフ
 
 module Game
   class Director
     def initialize
       @powergage = PowerGage.new #パワーゲージ
       @life = Life.new(3) #プレイヤーの残りライフ
+      @bosslife = BossLife.new(100) #ボスのライフ
       @haikei = Haikei.new#背景インスタンス
       @tile = Tile.new #床
+      @tile2 = Tile2.new #床
       @sky = Sky.new #ボス移動上限用
       @player = Player.new(@life) #プレイヤー
       @playershots = [] #プレイヤーの弾
@@ -25,6 +29,7 @@ module Game
     def play
       @haikei.draw#背景を描画
       @tile.update #床を描画
+      @tile2.update
       @sky.update #ボス移動上限天井
       @player.update(@life) #プレイヤー描画
       Sprite.check(@tile,@player) #床とプレイヤーのめり込みチェック
