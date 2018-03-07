@@ -1,6 +1,6 @@
 class Tile2 < Sprite
     def initialize
-      self.image = Image.new(800,200,C_WHITE)
+      self.image = Image.new(800,200,[160,82,45])
       self.x = 1000
       self.y = 400
       @speed = 5
