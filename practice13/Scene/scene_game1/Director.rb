@@ -1,7 +1,9 @@
 require_relative '../Lib/Player'
 require_relative '../Lib/Enemy'
+require_relative '../Lib/Boss'
 require_relative '../Lib/Tile'
 require_relative '../Lib/Haikei'#背景クラスのファイルを読み込み
+require_relative '../Lib/Sky'
 require_relative '../Lib/Info/PowerGage'#弾を発射するためのパワーゲージクラスのファイル読み込み
 require_relative '../Lib/Info/Life'#プレイヤーの残りライフクラス
 require_relative '../senser/senser_all'
@@ -17,10 +19,12 @@ module Game
       @player = Player.new #プレイヤー
       @playershots = [] #プレイヤーの弾
       @enemies = [] #敵配列
+      @boss = Boss.new(400,200)
       @count = 0#敵キャラ生成用カウント
       @board = board
       @senser_all = Senser_all.new(board)
       @light_now = 0
+      @sky = Sky.new
     end
 
     def play
