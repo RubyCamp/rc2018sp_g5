@@ -10,9 +10,10 @@ class Player < Sprite
         @speed = 5
         @shot = 0
         @s_flag = 0
+      #  @frm=0 #連続ジャンプ防止用　神野
     end
 
-    def update(playershot,light_now,ligh_hantei)
+    def update(playershot,light_now,ligh_hantei,distance_senser_hantei)
 
         #重力の設定
         y_move = (self.y - @y_prev) + @gravity
@@ -23,12 +24,20 @@ class Player < Sprite
         #左右移動
         self.x += Input.x * @speed
 
-        #ジャンプ
+        #ジャンプ スペースキー用
         if Input.key_push?(K_SPACE) && @flg == 1
             JUMP_SOUND.play
             @gravity = -20
             @flg = 0
         end
+
+        #ジャンプ　距離センサー用
+        if distance_senser_hantei == true && @flg == 1
+            JUMP_SOUND.play
+            @gravity = -20
+            @flg = 0
+        end
+
         #p ligh_hantei
         #p @s_flag
         #弾の発射
