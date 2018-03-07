@@ -3,31 +3,28 @@ class Boss < Sprite
         super
         self.x = x
         self.y = y
-        self.image = Image.new(100,100,C_BLUE)
+        self.image = Image.load('scene/images/Boss.png')
         @flg = 1 #ボスさん 0:UP移動 1:DOWN移動
     end
 
     def update
         self.draw
         if @flg == 1
-            self.y += 10
+            self.y += 5
         elsif @flg == 0
-            self.y -= 10
+            self.y -= 5
         end
     end
 
-    #移動上限に達したとき、DOWN移動に変更
     def hit
         @flg = 1
     end
 
-    #床に接触したら、UP移動に変更
     def hit_tile
         @flg = 0
     end
 
-    def hit_boss
-        #ボスの体力を減らす
-        put "ボスに当たりました"
+    def hit_p
+        #ボスのHPを減らす
     end
 end

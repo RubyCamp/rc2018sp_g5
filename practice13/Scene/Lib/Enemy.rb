@@ -20,6 +20,6 @@ class Enemy < Sprite
     end
 
     def shot
-        self.vanish
+        self.vanish      
     end
 end
