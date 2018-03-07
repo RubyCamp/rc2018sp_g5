@@ -65,7 +65,7 @@ class Player < Sprite
     end
 
     def hit
-        self.y = 368
+        self.y = 468
         @flg = 1
     end
 
