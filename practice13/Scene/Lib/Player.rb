@@ -16,7 +16,7 @@ class Player < Sprite
         @anm = 0
     end
 
-    def update(playershot)
+    def update(playershot,light_now,ligh_hantei,distance_senser_hantei)
 
         #重力の設定
         y_move = (self.y - @y_prev) + @gravity
@@ -27,15 +27,22 @@ class Player < Sprite
         #左右移動
         self.x += Input.x * @speed
 
-        #ジャンプ
+        #ジャンプ スペースキー用
         if Input.key_push?(K_SPACE) && @flg == 1
             JUMP_SOUND.play
             @gravity = -20
             @flg = 0
         end
 
+        #ジャンプ　距離センサー用
+        if distance_senser_hantei == true && @flg == 1
+            JUMP_SOUND.play
+            @gravity = -20
+            @flg = 0
+        end
+
         #弾の発射
-        if Input.key_push?(K_Z) && PowerGage.getPowerGage > 100
+        if ligh_hantei == "open" && PowerGage.getPowerGage > 100
           PLAYER_SHOT_SOUND.play #サウンド
           PowerGage.setPowerGage(-10)#powerを減らす
           playershot << Playershot.new(self.x,self.y)
