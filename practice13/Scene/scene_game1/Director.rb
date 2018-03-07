@@ -54,7 +54,9 @@ module Game
       @powergage.update
       #プレイヤーの残りライフの表示
       @life.update
+      #Gameover処理
       if @life.life == 0
+          BGM_SOUND.stop
           Scene.move_to(:gameover)
       end
 
