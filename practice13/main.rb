@@ -7,8 +7,8 @@ require_relative 'Scene/scene_game1/Director'
 Window.caption = 'あくしょんげーむてきな'
 
 #テスト用 舞台裏
-# Window.width = 1024
-# Window.height = 800
+ Window.width = 800
+ Window.height = 600
 
 #シーンの追加
 Scene.add(Title::Director.new, :title)

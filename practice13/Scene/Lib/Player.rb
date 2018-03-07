@@ -1,7 +1,7 @@
 class Player < Sprite
     def initialize
         super
-        self.x = 0
+        self.x = 150
         self.y = 0
         self.image = Image.new(32,32,C_RED)
         @y_prev = 32 #1フレーム前のy座標
