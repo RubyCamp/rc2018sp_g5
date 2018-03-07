@@ -44,7 +44,7 @@ module Game
       end
       @count += 1
 
-      #ボス出現 テスト用
+      #ボス出現
       @boss.update
 
       #vanishされたspriteがあれば、消去
