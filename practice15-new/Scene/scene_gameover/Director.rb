@@ -11,9 +11,9 @@ module Gameover
             Window.draw_font(200,100,'ゲームオーバー！',@font_title)
             Window.draw_font(200,200,'エスケープキーで終わる',@font_title)
 
-            sw_data = @senser.sw(@senser_all.sw_now_getter)
+            sw_data = @senser.sw_puch(@senser_all.sw_now_getter)
 
-            if sw_data == "ON"
+            if sw_data == "ON_NAGA"
               #break
               exit
             end

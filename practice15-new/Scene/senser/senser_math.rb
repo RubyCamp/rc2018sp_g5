@@ -31,17 +31,44 @@ class Senser_Math
     if board == 1 && @flag == 0
       retrun_data = "ON"
       @flag = 1
-    elsif board == 1 && @flag == 1#長押しマン
-      retrun_data = "ON_NAGA"
+    elsif board == 1 && @flag == 1
+      if @frm > 5#長押しマン
+        retrun_data = "ON_NAGA"
+      else
+        @frm += 1
+        retrun_data = "ON_N"
+      end
     elsif board == 0 && @flag == 1
       @flag = 0
       retrun_data = "OFF_NAGA"
     else
+      @frm = 0
       retrun_data = "OFF"
     end
 
+    #p retrun_data
+
     return retrun_data
   end
+
+  # def sw_long_puch(board)
+  #   #p @flag
+  #   #p board
+  #   if board == 1 && @flag == 0
+  #     retrun_data = "ON"
+  #     #@frm = 0
+  #     @flag = 1
+  #   elsif board == 1 && @flag == 1 && @frm > 5#長押しマン
+  #     retrun_data = "ON_NAGA"
+  #   elsif board == 0 && @flag == 1
+  #     @flag = 0
+  #     retrun_data = "OFF_NAGA"
+  #   else
+  #     retrun_data = "OFF"
+  #   end
+  #
+  #   return retrun_data
+  # end
 
   def oto_puch(board)
     #p @flag
