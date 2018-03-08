@@ -12,6 +12,6 @@ class Life
          Window.draw(lx,50,@img)
        end
        #ライフ 表示用フォント
-       Window.draw_font(10,50,"LIFE:#{@life}",@font)
+       #Window.draw_font(10,50,"LIFE:#{@life}",@font)
     end
 end

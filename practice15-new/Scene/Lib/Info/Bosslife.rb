@@ -7,11 +7,11 @@ class BossLife
     end
 
     def update
-      @life.times do |i|
-          lx = i * 30
+      @bosslife.times do |i|
+          lx = i * 30 + 550
           Window.draw(lx,50,@img)
       end
        #ライフ 表示用フォント
-       Window.draw_font(400,50,"BOSS LIFE:#{@bosslife}",@font)
+       Window.draw_font(400,50,"BOSS LIFE",@font)
     end
 end

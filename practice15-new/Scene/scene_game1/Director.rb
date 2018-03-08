@@ -77,7 +77,7 @@ module Game
       @count += 1
 
       #アイテム出現(しじみ)
-        if @count % 100 == 0
+        if @count % 200 == 0
           @sizimis << Sizimi.new(Window.width,rand(100..300))
         end
 
