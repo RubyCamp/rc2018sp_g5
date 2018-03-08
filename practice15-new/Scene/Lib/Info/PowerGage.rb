@@ -1,6 +1,6 @@
 class PowerGage
     #ゲージの中身 端ｘ座標
-    @@gage_content_x = 400
+    @@gage_content_x = 100
     def initialize
         #ゲージ位置
         @x = 100
@@ -19,7 +19,7 @@ class PowerGage
     end
 
     def self.setPowerGage(power)
-        @@gage_content_x += power
+        @@gage_content_x += power if !power < 400
     end
 
     def update

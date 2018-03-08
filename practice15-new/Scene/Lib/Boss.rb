@@ -7,7 +7,7 @@ class Boss < Sprite
         self.y = y
         self.image = Image.load('scene/images/Boss.png')
         @flg = 1 #ボスさん 0:UP移動 1:DOWN移動
-        @ruby_img = Image.load('scene/images/Boss.png')
+        @ruby_img = Image.load('scene/images/ruby.png')
         @ruby_img.set_color_key(C_WHITE)
     end
 

@@ -11,7 +11,8 @@ class Player < Sprite
         @life = life
         @p_img = [Image.load('Scene/images/player1.png'),
           Image.load('Scene/images/player2.png'),
-          Image.load('Scene/images/player3.png')]
+          Image.load('Scene/images/player3.png'),
+          Image.load('Scene/images/player2.png')]
         @ani = 0
         @anm = 0
     end
@@ -49,7 +50,7 @@ class Player < Sprite
         # end
 
         #弾の発射　スイッチ
-        if sw_hantei == "ON" && PowerGage.getPowerGage >= 10 && ligh_hantei == "close"
+        if sw_hantei == "ON" && PowerGage.getPowerGage >= 110 && ligh_hantei == "close"
           PLAYER_SHOT_SOUND.play #サウンド
           PowerGage.setPowerGage(-10)#powerを減らす
           playershot << Playershot.new(self.x,self.y)
@@ -63,7 +64,7 @@ class Player < Sprite
         # end
 
         #弾の発射2
-        if PowerGage.getPowerGage >= 300 && oto_hantei == "ON" && ligh_hantei == "close"
+        if PowerGage.getPowerGage >= 400 && oto_hantei == "ON" && ligh_hantei == "close"
           PLAYER_SHOT_SOUND.play #サウンド
           PowerGage.setPowerGage(-300)#powerを減らす
           playershot2 << Playershot2.new(self.x + 50,self.y + 10)
@@ -74,11 +75,11 @@ class Player < Sprite
         end
 
         @ani += 1
-        if @ani == 10
+        if @ani == 8
             @ani = 0
             @anm += 1
         end
-        if @anm == 3
+        if @anm == 4
             @anm = 0
         end
         self.image = @p_img[@anm]
