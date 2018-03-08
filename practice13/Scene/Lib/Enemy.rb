@@ -3,7 +3,7 @@ class Enemy < Sprite
         super
         self.x = x
         self.y = y
-        self.image = Image.new(32,32).box_fill(0,0,32,32,[0,0,255])
+        self.image = Image.load('Scene/images/enemy.png')
     end
 
     def update
