@@ -9,7 +9,7 @@ module Gameclear
 
       @haikei = Haikei.new#背景インスタンス
       @clear = Image.load('Scene/images/clear.png')#タイトルの画像
-
+      @playerruby = Image.load('Scene/images/player_ruby')#playerの画像
 
     end
 
@@ -19,7 +19,8 @@ module Gameclear
 
       @haikei.draw#背景を描画
       Window.draw(180,100,@clear)#タイトルを表示
-      Window.draw_font(200,350,'ボタンを押して終了',@font_title,:color=>[0,0,0])
+      Window.draw(360,300,@playerruby)#playerを表示
+      Window.draw_font(200,450,'ボタンを押して終了',@font_title,:color=>[0,0,0])
 
 
       #Window.draw(0,0,@img,-1)#背景描画　旧白い背景
