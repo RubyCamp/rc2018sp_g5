@@ -3,14 +3,14 @@ module Gameclear
         def initialize
             #Font
             @font_title = Font.new(30,'MSゴシック')
-            @img = Image.new(800,600,C_WHITE)
+            @clear = Image.load('Scene/images/clear.png')#タイトルの画像
+
         end
 
         def play
-            Window.draw(0,0,@img,-1)#背景描画
-            Window.draw_font(200,100,'ゲームクリアー！',@font_title,:color=>[0,0,0])
-            Window.draw_font(200,200,'エスケープキーで終わる',@font_title,:color=>[0,0,0])
 
+            Window.draw(180,100,@clear)#タイトルを表示
+            Window.draw_font(200,350,'ボタンを押して終了',@font_title,:color=>[0,0,0])
         end
     end
 end
