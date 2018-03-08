@@ -9,7 +9,7 @@ module Gameclear
 
       @haikei = Haikei.new#背景インスタンス
       @clear = Image.load('Scene/images/clear.png')#タイトルの画像
-      @playerruby = Image.load('Scene/images/player_ruby')#playerの画像
+      @playerruby = Image.load('Scene/images/player_ruby.png')#playerの画像
 
     end
 

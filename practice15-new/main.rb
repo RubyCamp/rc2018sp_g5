@@ -29,6 +29,10 @@ PLAYER_SHOT_SOUND = Sound.new('./Sound/playershot.wav') #プレイヤー弾発�
 EXPLOSION_SOUND = Sound.new('./Sound/explosion.wav')#敵破壊時
 BGM_SOUND = Sound.new('./Sound/bgm.wav')#プレイ中BGM
 JUMP_SOUND = Sound.new('./Sound/jump.wav')#プレイヤージャンプ時
+DAMAGE_SOUND = Sound.new('./Sound/damage.wav')
+GET_SIZIMI_SOUND = Sound.new('./Sound/getsizimi.wav')
+GAME_OVER_SOUND = Sound.new('./Sound/gameover.wav')
+GAME_CLEAR_SOUND = Sound.new('./Sound/gameclear.wav')
 
 #タイトル画面へ移行
 Scene.move_to(:title)

@@ -60,6 +60,7 @@ module Game
       Sprite.check(@playershots2,@enemies)#プレイヤーの弾2と敵配列の当たり判定
       if Sprite.check(@enemies,@player,shot=:shot,hit=:hit2)#敵配列とプレイヤー配列の当たり判定
         @life.life -= 1
+        DAMAGE_SOUND.play
       end
       Sprite.check(@enemies,@tile,shot=:shot_tile,hit=:hit)#敵と床の判定
       Sprite.check(@enemies,@sky,shot=:shot_sky,hit=:hit)#敵と空の判定
@@ -90,6 +91,7 @@ module Game
       #アイテムに当たったら、ライフを回復する
       if Sprite.check(@player,@sizimis)
         @life.life += 1
+        GET_SIZIMI_SOUND.play
       end
 
       #ボス出現
@@ -108,12 +110,15 @@ module Game
       #Gameover処理
       if @life.life == 0 || @player.y > Window.height
         BGM_SOUND.stop
+        GAME_OVER_SOUND.play
         Scene.move_to(:gameover)
       end
 
       #ボスの残りライフの表示
       @bosslife.update
       if @bosslife.bosslife == 0
+         BGM_SOUND.stop
+        GAME_CLEAR_SOUND.play
         Scene.move_to(:gameclear)#gameoverは仮
       end
 
