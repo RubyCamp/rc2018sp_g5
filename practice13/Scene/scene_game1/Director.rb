@@ -45,7 +45,7 @@ module Game
       #@tile2.update #床を描画
       @sky.update #ボス移動上限天井
       Sprite.check(@tile,@player) #床とプレイヤーのめり込みチェック
-      @player.update(@playershots,@light_data,Ligh_f.main(open_light,close_light,@board.analog_read(0)),Distance_senser.main(@senser_all.distance_value_getter))#プレイヤーの弾の描画
+      @player.update(@playershots,@playershots2,@light_data,Ligh_f.main(open_light,close_light,@board.analog_read(0)),Distance_senser.main(@senser_all.distance_value_getter))#プレイヤーの弾の描画
       Sprite.update([@playershots,@playershots2,@enemies])#プレイヤーの弾配列と敵配列の描画
       Sprite.check(@playershots,@enemies)#プレイヤーの弾と敵配列の当たり判定
       Sprite.check(@playershots2,@enemies)#プレイヤーの弾2と敵配列の当たり判定
