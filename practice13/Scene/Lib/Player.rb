@@ -16,7 +16,7 @@ class Player < Sprite
         @anm = 0
     end
 
-    def update(playershot,light_now,ligh_hantei,distance_senser_hantei)
+    def update(playershot,playershot2,light_now,ligh_hantei,distance_senser_hantei)
 
         #重力の設定
         y_move = (self.y - @y_prev) + @gravity
@@ -47,6 +47,13 @@ class Player < Sprite
           PowerGage.setPowerGage(-10)#powerを減らす
           playershot << Playershot.new(self.x,self.y)
         end
+        
+        #弾の発射2
+        if ligh_hantei == "open" && PowerGage.getPowerGage >= 300 && Input.key_push?(K_Z)
+          PLAYER_SHOT_SOUND.play #サウンド
+          PowerGage.setPowerGage(-300)#powerを減らす
+          playershot2 << Playershot2.new(self.x + 50,self.y + 10)
+        end
 
         @ani += 1
         if @ani == 10
@@ -67,9 +74,8 @@ class Player < Sprite
         @flg = 1
     end
 
-    #敵と当たったらLIFEが減る(仮)
     def hit2
-
+        #ここでは何もしない
     end
 end
 
@@ -78,7 +84,7 @@ class Playershot < Sprite
     super
     self.x = x
     self.y = y
-    self.image = Image.new(20,20).circle_fill(10,10,10,C_RED)
+    self.image = Image.new(20,20).circle_fill(10,10,10,C_WHITE)
   end
 
   def update
@@ -93,5 +99,27 @@ class Playershot < Sprite
   def shot
      EXPLOSION_SOUND.play
      self.vanish
+  end
+end
+
+class Playershot2 < Sprite
+  def initialize(x,y)
+    super
+    self.x = x
+    self.y = y
+    self.image = Image.new(300,10).box_fill(0,0,300,10,C_YELLOW)
+  end
+
+  def update
+    self.draw
+    self.x += 10
+
+    if self.x > Window.width
+      self.vanish
+    end
+  end
+
+  def shot
+     EXPLOSION_SOUND.play
   end
 end
