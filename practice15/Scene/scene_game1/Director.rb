@@ -11,6 +11,7 @@ require_relative '../Lib/Info/Bosslife'#ボスの残りライフクラス
 require_relative '../senser/senser_all'
 require_relative '../senser/ligh_f'
 require_relative '../senser/distance_senser'#距離センサ
+require_relative '../Lib/Item/Sizimi'#アイテム　しじみ
 
 
 module Game
@@ -32,7 +33,7 @@ module Game
       @board = board
       @senser_all = Senser_all.new(board)
       @light_now = 0
-
+      @sizimis = [] #アイテム配列
     end
 
     def play
@@ -46,7 +47,7 @@ module Game
       @sky.update #ボス移動上限天井
       Sprite.check(@tile,@player) #床とプレイヤーのめり込みチェック
       @player.update(@playershots,@playershots2,@light_data,Ligh_f.main(open_light,close_light,@board.analog_read(0)),Distance_senser.main(@senser_all.distance_value_getter))#プレイヤーの弾の描画
-      Sprite.update([@playershots,@playershots2,@enemies])#プレイヤーの弾配列と敵配列の描画
+      Sprite.update([@playershots,@playershots2,@enemies,@sizimis])#プレイヤーの弾配列と敵配列の描画
       Sprite.check(@playershots,@enemies)#プレイヤーの弾と敵配列の当たり判定
       Sprite.check(@playershots2,@enemies)#プレイヤーの弾2と敵配列の当たり判定
       if Sprite.check(@enemies,@player,shot=:shot,hit=:hit2)#敵配列とプレイヤー配列の当たり判定
@@ -72,6 +73,16 @@ module Game
         @enemies << Enemy.new(600,352)
       end
       @count += 1
+
+      #アイテム出現(しじみ)
+        if @count % 100 == 0
+          @sizimis << Sizimi.new(Window.width,rand(100..300))
+        end
+
+        #アイテムに当たったら、ライフを回復する
+        if Sprite.check(@player,@sizimis)
+            @life.life += 1
+        end
 
       #ボス出現
       @boss.update
