@@ -25,6 +25,7 @@ module Game
       @sky = Sky.new #ボス移動上限用
       @player = Player.new(@life) #プレイヤー
       @playershots = [] #プレイヤーの弾
+      @playershots2 = [] #プレイヤーの弾2
       @enemies = [] #敵配列
       @count = 0#敵キャラ生成用カウント
       @boss = Boss.new(Window.width - 200,200)#ボス生成(テスト用)
@@ -45,8 +46,9 @@ module Game
       @sky.update #ボス移動上限天井
       Sprite.check(@tile,@player) #床とプレイヤーのめり込みチェック
       @player.update(@playershots,@light_data,Ligh_f.main(open_light,close_light,@board.analog_read(0)),Distance_senser.main(@senser_all.distance_value_getter))#プレイヤーの弾の描画
-      Sprite.update([@playershots,@enemies])#プレイヤーの弾配列と敵配列の描画
+      Sprite.update([@playershots,@playershots2,@enemies])#プレイヤーの弾配列と敵配列の描画
       Sprite.check(@playershots,@enemies)#プレイヤーの弾と敵配列の当たり判定
+      Sprite.check(@playershots2,@enemies)#プレイヤーの弾2と敵配列の当たり判定
       if Sprite.check(@enemies,@player,shot=:shot,hit=:hit2)#敵配列とプレイヤー配列の当たり判定
         @life.life -= 1
       end
@@ -57,6 +59,10 @@ module Game
       Sprite.check(@tile2,@boss,shot= :shot,hit= :hit_tile) #ボスと床の当たり判定
       #ボスとプレイヤーの弾の当たり判定
       if Sprite.check(@playershots,@boss,shot= :shot,hit= :hit_p)
+        @bosslife.bosslife -= 1
+      end
+      #ボスとプレイヤーの弾2の当たり判定
+      if Sprite.check(@playershots2,@boss,shot= :shot,hit= :hit_p)
         @bosslife.bosslife -= 1
       end
 
