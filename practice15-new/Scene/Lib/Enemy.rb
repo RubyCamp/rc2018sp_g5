@@ -6,12 +6,13 @@ class Enemy < Sprite
         self.x = x
         self.y = y
         self.image = Image.load('Scene/images/enemy.png')
-        @y_move = 5
+        @x_speed = 5
+        @y_move = 8
     end
 
     def update
         self.draw
-        self.x -= 10
+        self.x -= @x_speed
         self.y += @y_move
 
         if self.x < 0

@@ -19,7 +19,7 @@ module Game
     def initialize(board)
       @powergage = PowerGage.new #パワーゲージ
       @life = Life.new(5) #プレイヤーの残りライフ
-      @bosslife = BossLife.new(3)#ボスの残りライフ
+      @bosslife = BossLife.new(10)#ボスの残りライフ
       @haikei = Haikei.new#背景インスタンス
       @tile = Tile.new #床
       #@tile2 = Tile2.new #床

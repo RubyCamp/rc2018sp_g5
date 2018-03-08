@@ -4,7 +4,7 @@ class Player < Sprite
         self.x = 0
         self.y = 0
         self.image = Image.load('Scene/images/player1.png')
-        @y_prev = 60 #1フレーム前のy座標
+        @y_prev = self.y #1フレーム前のy座標
         @gravity = 2#重力
         @jump_ok = false #ジャンプ許可
         @speed = 5
@@ -15,25 +15,34 @@ class Player < Sprite
           Image.load('Scene/images/player2.png')]
         @ani = 0
         @anm = 0
-    end
+        @dy = 0
+        end
 
-    def update(playershot,playershot2,light_now,ligh_hantei,distance_senser_hantei,sw_hantei, oto_hantei)
-
-        #重力の設定
-        y_move = (self.y - @y_prev) + @gravity
-        @y_prev = self.y
-        self.y += y_move
-        @gravity = 2
+        def update(playershot,playershot2,light_now,ligh_hantei,distance_senser_hantei,sw_hantei, oto_hantei)
+            #重力の設定
+            y_move = (self.y - @y_prev) + @gravity
+            @y_prev = self.y
+            if self.y < 340
+            @dy = y_move
+            self.y += @dy
+            else
+            @flg = 1
+            end
+            if @gravity == -20
+              self.y -= 30
+            @flg = 0
+            end
+            @gravity = 2
 
         #左右移動
         self.x += Input.x * @speed
 
-        # #ジャンプ スペースキー用
-        # if Input.key_push?(K_SPACE) && @flg == 1
-        #     JUMP_SOUND.play
-        #     @gravity = -20
-        #     @flg = 0
-        # end
+        #ジャンプ スペースキー用
+         if Input.key_push?(K_SPACE) && @flg == 1
+             JUMP_SOUND.play
+             @gravity = -20
+             @flg = 0
+         end
 
         #ジャンプ　距離センサー用
         if distance_senser_hantei == true && @flg == 1
