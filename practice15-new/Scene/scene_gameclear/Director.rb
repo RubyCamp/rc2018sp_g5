@@ -1,25 +1,38 @@
 module Gameclear
-    class Director
-        def initialize(board)
-            #Font
-            @font_title = Font.new(30,'MSゴシック')
-            @img = Image.new(800,600,C_WHITE)
-            @senser_all = Senser_all.new(board)
-            @senser = Senser_Math.new
-        end
+  class Director
+    def initialize(board)
+      #Font
+      @font_title = Font.new(30,'MSゴシック')
+      #@img = Image.new(800,600,C_WHITE) #旧白い背景
+      @senser_all = Senser_all.new(board)
+      @senser = Senser_Math.new
 
-        def play
-            Window.draw(0,0,@img,-1)#背景描画
-            Window.draw_font(200,100,'ゲームクリアー！',@font_title,:color=>[0,0,0])
-            Window.draw_font(200,200,'エスケープキーで終わる',@font_title,:color=>[0,0,0])
-            sw_data = @senser.sw_puch(@senser_all.sw_now_getter)
-            p sw_data
-            if sw_data == "ON_NAGA"
-              #break
-              exit
-            end
+      @haikei = Haikei.new#背景インスタンス
+      @clear = Image.load('Scene/images/clear.png')#タイトルの画像
 
 
-        end
     end
+
+    def play
+      @haikei.kumo_x ||= Scene.kumo_x_getter
+      @haikei.tatemono_x ||= Scene.tatemono_x_getter
+
+      @haikei.draw#背景を描画
+      Window.draw(180,100,@clear)#タイトルを表示
+      Window.draw_font(200,350,'ボタンを押して終了',@font_title,:color=>[0,0,0])
+
+
+      #Window.draw(0,0,@img,-1)#背景描画　旧白い背景
+      # Window.draw_font(200,100,'ゲームクリアー！',@font_title,:color=>[0,0,0])
+      # Window.draw_font(200,200,'エスケープキーで終わる',@font_title,:color=>[0,0,0])
+      sw_data = @senser.sw_puch(@senser_all.sw_now_getter)
+      p sw_data
+      if sw_data == "ON_NAGA"
+        #break
+        exit
+      end
+
+
+    end
+  end
 end

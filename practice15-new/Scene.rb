@@ -4,6 +4,9 @@ class Scene
     @@light_open = 0
     @@light_close = 0
 
+    @@scene_kumo_x = 0
+    @@scene_tatemono_x = 0
+
     def self.add(scene_obj,scene_name)
         #to_sym レシーバのシンボル自身を返す
         @@scenes[scene_name.to_sym] = scene_obj
@@ -32,6 +35,23 @@ class Scene
     def self.ligh_close_setter(val)
       @@light_close = val
     end
+
+    def self.kumo_x_getter
+      @@scene_kumo_x
+    end
+
+    def self.tatemono_x_getter
+      @@scene_tatemono_x
+    end
+
+    def self.kumo_x_setter(val)
+      @@scene_kumo_x = val
+    end
+
+    def self.tatemono_x_setter(val)
+      @@scene_tatemono_x = val
+    end
+
 =begin
     def self.board_getter
       @@board

@@ -17,6 +17,7 @@ Window.height = 600
 #
 board = Smalrubot::Board.new(Smalrubot::TxRx::Serial.new)
 
+
 #シーンの追加
 Scene.add(Title::Director.new(board), :title)
 Scene.add(Game::Director.new(board), :game1)
