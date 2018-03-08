@@ -6,6 +6,10 @@ require_relative 'Scene/scene_game1/Director'
 require_relative 'Scene/scene_gameover/Director'
 require_relative 'Scene/scene_gameclear/Director'
 
+require_relative 'Scene/Lib/Haikei'#背景クラスのファイルを読み込み
+
+
+
 #ゲーム名
 Window.caption = 'あくしょんげーむてきな'
 
@@ -31,8 +35,11 @@ JUMP_SOUND = Sound.new('./Sound/jump.wav')#プレイヤージャンプ時
 #タイトル画面へ移行
 Scene.move_to(:title)
 
-Window.loop do
-    Scene.play
+@haikei = Haikei.new#背景インスタンス
 
-    break if Input.key_push?(K_ESCAPE)
+Window.loop do
+  @haikei.draw#背景を描画
+  Scene.play
+
+  break if Input.key_push?(K_ESCAPE)
 end
