@@ -52,7 +52,8 @@ module Game
       if Sprite.check(@enemies,@player,shot=:shot,hit=:hit2)#敵配列とプレイヤー配列の当たり判定
         @life.life -= 1
       end
-
+      Sprite.check(@enemies,@tile,shot =:shot_tile)#敵と床の判定
+      Sprite.check(@enemies,@sky,shot =:shot_sky)#敵と空の判定
 
       Sprite.check(@sky,@boss) #ボス移動上限天井とボスの当たり判定
       Sprite.check(@tile,@boss,shot= :shot,hit= :hit_tile) #ボスと床の当たり判定
