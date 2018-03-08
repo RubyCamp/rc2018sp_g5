@@ -5,9 +5,12 @@ class Boss < Sprite
         self.y = y
         self.image = Image.load('scene/images/Boss.png')
         @flg = 1 #ボスさん 0:UP移動 1:DOWN移動
+        @ruby_img = Image.load('scene/images/ruby.png')
+        @ruby_img.set_color_key(C_WHITE)
     end
 
     def update
+        Window.draw(self.x + 50,self.y - 15,@ruby_img,1)
         self.draw
         if @flg == 1
             self.y += 5
